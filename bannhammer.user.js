@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name            Bannliste - cerberus91_de Edition Beta
+// @name            Bannliste - cerberus91_de Edition 
 // @description     A tool for moderating Twitch easier during hate raids
-// @namespace       Bannliste - cerberus91_de Edition Beta
-// @version         1.0.0.1
+// @namespace       Bannliste - cerberus91_de Edition 
+// @version         1.1.0.0
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // @homepageURL     https://github.com/TwitchmodsDACH/Bann-Hammer
@@ -34,7 +34,7 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.0.0.1"
+    var myVersion = "1.1.0.0"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
@@ -51,6 +51,7 @@
     var mdgBtnStreamSniperText = "➕ Streamsniper"
     var mdgBtnFakeScamText = "➕ Fake/Scam Acc"
     var mdgBtnPornBotText = "➕ Porn Bot"
+    var mdgBtnMasterListText = "➕ MasterBann"
     var replaceFooter = "none"
     var isPaused = false;
     var queueList = new Set();
@@ -248,7 +249,7 @@
               <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="5 5 1280 1280" style="color: ${themeTextColor};fill: currentcolor;align:center;">
                 <path d="M517 1c-16 3-28 10-41 22l-10 10 161 160 161 161 2-2c6-4 17-19 21-25 10-19 12-44 4-64-6-14-5-13-120-129L576 17c-8-7-18-12-27-15-8-1-25-2-32-1zM249 250 77 422l161 161 161 161 74-74 74-75 18 19 18 18-2 4c-4 6-4 14-1 20a28808 28808 0 0 0 589 621c4 2 6 3 13 3 6 0 8-1 13-3 6-4 79-77 82-83 4-9 4-21-2-29l-97-93-235-223-211-200c-51-47-73-68-76-69-6-3-13-3-19 0l-5 3-18-18-18-18 74-74 74-74-161-161L422 77 249 250zM23 476a75 75 0 0 0-10 95c4 6 219 222 231 232 8 7 16 11 26 14 6 2 10 2 22 2s14 0 22-2l14-6c5-4 20-16 24-21l2-2-161-161L32 466l-9 10z"/>
               </svg>
-              &nbsp;&nbsp;Cerberus91_DE Edition (Beta)</a>
+              &nbsp;&nbsp;cerberus91_de </a>
         </h5><br>
 
         <span style="flex-grow: 1;"></span>
@@ -279,11 +280,12 @@
         <div style="align:center">
           <button id="mdgBtnAdvertising" class="mdgBtnAdvertising" style="width:32%" title="Importiert isds_advertising Liste">${mdgBtnAdvertisingText}</button>
           <button id="mdgBtnSpamBots" class="mdgBtnSpamBots" style="width:33%" title="Importiert isds_spam_bots Liste">${mdgBtnSpamBotsText}</button>
-          <button id="isds" class="isds" style="width:32%" title="Webseite des Institut für Sicherheit und Daten-Analyse im Streaming">https://isds.tech</button>
+          <button id="mdgBtnMasterListText" class="mdgBtnMasterListText" style="width:32%" title="Importiert alle Listen">${mdgBtnMasterListText}</button>
         </div>
         <div style="align:center">
           <button id="mdgBtnFakeScam" class="mdgBtnFakeScam" style="width:32%" title="Importiert isds_fake_scam Liste">${mdgBtnFakeScamText}</button>
           <button id="mdgBtnPornBot" class="mdgBtnPornBot" style="width:33%" title="Importiert isds_spam_bots Liste">${mdgBtnPornBotText}</button>
+          <button id="isds" class="isds" style="width:32%" title="Webseite des Institut für Sicherheit und Daten-Analyse im Streaming">https://isds.tech</button>
         </div>
     </div>
     <div class="body">
@@ -310,7 +312,7 @@
     </div>
     <div id="footer" class="footer">
     <a href="https://github.com/TwitchmodsDACH/Bannlisten" target="_blank" style="color: ${themeTextColor};" id="replaceFooter" titel="Zur Bannliste">TwitchModsDACH Bannlisten</a>&nbsp;-&nbsp;
-    <a id="manoooo" href="https://github.com/TwitchmodsDACH/Bann-Hammer/raw/main/bannhammer.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
+    <a id="manoooo" href="https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
     </div>`;
 
     // Append Bann-Hammer after page load
@@ -420,6 +422,7 @@
     d.querySelector(".import button.tmdBtnStreamSniper").onclick = importMDGStreamSniper;
     d.querySelector(".import button.mdgBtnFakeScam").onclick = importMDGFakeScam;
     d.querySelector(".import button.mdgBtnPornBot").onclick = importMDGPorn;
+    d.querySelector(".import button.mdgBtnMasterListText").onclick = importMDGMasterList;
     d.querySelector(".import button.importBtn").onclick = importList;
 
     // delegated events
@@ -489,7 +492,7 @@
     // Function checking new versions
     function toggle() {
       function checkVersion() {
-        fetch("https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.beta.user.js")
+        fetch("https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.user.js")
           .then((response) => response.text())
           .then((text) => {
             var regex = /@version\s+(\d.*)/;
@@ -1064,21 +1067,98 @@
         var banReasonElement = document.getElementById("banReason");
         banReasonElement.value = "Porn Bot Account";
 
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_porn_bot_acc_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnPornBot"));
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_porn_bot_acc_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_porn_bot_acc_list.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnPornBot").innerHTML = mdgBtnPornBotText
-      }
-      setTimeout(dumdidum, 250)
+        // URLs der Datenquellen
+                  const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_porn_bot_acc_list.txt";
+                  const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_porn_bot_acc_list.txt";
+
+                  // Fetch Data from both TXT lists
+                  Promise.all([
+                    fetch(txtListUrl1).then(response => response.text()),
+                    fetch(txtListUrl2).then(response => response.text())
+                  ])
+                  .then(([data1, data2]) => {
+                    // Combine the data from the TXT lists
+                    usersToBan.push(...data1.split("\n").filter(Boolean));
+                    usersToBan.push(...data2.split("\n").filter(Boolean));
+
+                    // Process the combined list
+                    usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnPornBot"));
+                    textarea.value = '';
+                    insertText(Array.from(queueList));
+                    if (queueList.size !== 0) { toggleImport(); renderList(); }
+                  })
+                  .catch(error => {
+                    console.error('Fehler beim Abrufen der Daten:', error);
+                  });
+
+                  // Update replaceFooter for both sources
+                  document.getElementById("replaceFooter").innerHTML = `
+                    Geladene Listen:
+                    <br><a href="${txtListUrl1}" target="_blank">isds_fake_scam_list.txt</a>
+                    <br><a href="${txtListUrl2}" target="_blank">cerberus_porn_bot_acc_list.txt</a>
+                  `;
+
+                  function dumdidum() {
+                    document.getElementById("mdgBtnPornBot").innerHTML = mdgBtnPornBotText;
+                  }
+                  setTimeout(dumdidum, 250);
+                }
+
+    function importMDGMasterList() {
+        queueList.clear();
+        var usersToBan = [];
+        document.getElementById("banReason").value = "MasterBann";
+
+        // URLs der Datenquellen
+        const txtListUrls = [
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_0_g.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_h_m.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_n_z.txt",
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_security_ban_list.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_viewer_bot_list.txt",
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_viewer_bot_list.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_follower_bot_list.txt",
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_follower_bot_list.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_seller_advertising_list.txt",
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_seller_advertising_list.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_spam_bot_list.txt",
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_spam_bot_list.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_streamsniper_list.txt",
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_streamsniper_list.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_fake_scam_list.txt",
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_fake_scam_list.txt",
+            "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_porn_bot_acc_list.txt",
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_porn_bot_acc_list.txt"
+        ];
+
+        // Daten von allen URLs abrufen und kombinieren
+        Promise.all(txtListUrls.map(url => fetch(url).then(response => response.text())))
+            .then(dataArray => {
+                dataArray.forEach(data => {
+                    usersToBan.push(...data.split("\n").filter(Boolean));
+                });
+
+                // Kombinierte Liste verarbeiten
+                usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnMasterListText"));
+                textarea.value = '';
+                insertText(Array.from(queueList));
+                if (queueList.size !== 0) {
+                    toggleImport();
+                    renderList();
+                }
+            })
+            .catch(error => console.error('Fehler beim Abrufen der Daten:', error));
+
+        // Update des Footers
+        document.getElementById("replaceFooter").innerHTML = `
+            Geladene Listen:
+            <br><a href="https://github.com/Cerberus91DE/Bannlisten" target="_blank">github.com Bannlisten</a>
+        `;
+
+        setTimeout(() => {
+            document.getElementById("mdgBtnMasterListText").innerHTML = mdgBtnMasterListText;
+        }, 250);
     }
 
     // Functions to ban/unban/ignore/accountage
