@@ -315,7 +315,7 @@
     </div>
     <div id="footer" class="footer">
     <a href="https://github.com/TwitchmodsDACH/Bannlisten" target="_blank" style="color: ${themeTextColor};" id="replaceFooter" titel="Zur Bannliste">TwitchModsDACH Bannlisten</a>&nbsp;-&nbsp;
-    <a id="manoooo" href="https://github.com/TwitchmodsDACH/Bann-Hammer/raw/main/bannhammer.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
+    <a id="manoooo" href="https://github.com/Cerberus91DE/Bann-Hammer/blob/main/bannhammer.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
     </div>`;
 
     // Append Bann-Hammer after page load
@@ -1052,8 +1052,8 @@
 
     // Render list or show logo
     function renderList() {
-    // Maximal 1000 Benutzer anzeigen
-    const maxUsersToShow = 1000;
+    // Maximal 500 Benutzer anzeigen
+    const maxUsersToShow = 500;
 
     d.querySelector(".ignoreAll").style.display = queueList.size ? '' : 'none';
     d.querySelector(".banAll").style.display = queueList.size ? '' : 'none';
@@ -1062,7 +1062,7 @@
     d.querySelector(".modChannels").style.display = queueList.size ? '' : 'none';
     d.querySelector(".unbanAll").style.display = queueList.size ? '' : 'none';
 
-    // Begrenzen auf die ersten 1000 Benutzer
+    // Begrenzen auf die ersten 500 Benutzer
     const limitedQueueList = [...queueList].slice(0, maxUsersToShow);
 
     const renderItem = item => `
@@ -1087,7 +1087,6 @@
     </ul>`;
     }
 })();
-
 
 
 function modMenu() {
