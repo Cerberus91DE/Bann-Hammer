@@ -2,17 +2,12 @@
 // @name            Bannliste - cerberus91_de Edition Beta
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - cerberus91_de Edition Beta
-// @version         1.0.0.0
+// @version         1.0.0.1
 // @match           *://www.twitch.tv/*
-// @run-at          document-idle
 // @author          TwitchModsDACH - The original code is from victornpb
 // @homepageURL     https://github.com/TwitchmodsDACH/Bann-Hammer
 // @supportURL      https://github.com/TwitchmodsDACH/Bann-Hammer/issues
 // @contributionURL https://github.com/TwitchmodsDACH/Bann-Hammer
-// @grant           GM_setValue
-// @grant           GM_getValue
-// @grant           GM_xmlhttpRequest
-// @license         MIT
 // ==/UserScript==
 
 /* jshint esversion: 8 */
@@ -39,7 +34,7 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.0.0.0"
+    var myVersion = "1.0.0.1"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
@@ -585,97 +580,178 @@
         document.getElementById("textfield").value = text;
     }
 
-    // Functions to import lists from TwitchModsDACH Repository
     function importMDGtrolls0() {
-      queueList.clear();
-      var usersToBan = [];
-      var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Hate/Trolls TwitchmodsDACH Bannliste";
-
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_0_g.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnTrolls0"))
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'isds_hate_troll_list_0_g.txt' anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_0_g.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnTrolls0").innerHTML = mdgBtnTrollsText0
-      }
-      setTimeout(dumdidum, 250)
-    }
-
-    function importMDGtrolls1() {
         queueList.clear();
         var usersToBan = [];
         var banReasonElement = document.getElementById("banReason");
         banReasonElement.value = "Hate/Trolls TwitchmodsDACH Bannliste";
 
-    fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_h_m.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnTrolls1"))
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
+        // URLs der Datenquellen
+        const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_0_g.txt";
+        const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt";
+
+        // Fetch Data from both TXT lists
+        Promise.all([
+          fetch(txtListUrl1).then(response => response.text()),
+          fetch(txtListUrl2).then(response => response.text())
+        ])
+        .then(([data1, data2]) => {
+          // Combine the data from the TXT lists
+          usersToBan.push(...data1.split("\n").filter(Boolean));
+          usersToBan.push(...data2.split("\n").filter(Boolean));
+
+          // Process the combined list
+          usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnTrolls0"));
+          textarea.value = '';
+          insertText(Array.from(queueList));
+          if (queueList.size != "0") { toggleImport(); renderList(); }
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'isds_hate_troll_list_h_m.txt' anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_h_m.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnTrolls1").innerHTML = mdgBtnTrollsText
+
+        // Update replaceFooter for both sources
+        document.getElementById("replaceFooter").innerHTML = `
+          Geladene Listen:
+          <br><a href="${txtListUrl1}" target="_blank">isds_hate_troll_list_0_g.txt</a>
+          <br><a href="${txtListUrl2}" target="_blank">cerberus_hate_troll_list.txt</a>
+        `;
+
+        function dumdidum() {
+          document.getElementById("mdgBtnTrolls0").innerHTML = mdgBtnTrollsText0;
+        }
+        setTimeout(dumdidum, 250);
       }
-      setTimeout(dumdidum, 250)
-    }
+
+    function importMDGtrolls1() {
+            queueList.clear();
+            var usersToBan = [];
+            var banReasonElement = document.getElementById("banReason");
+            banReasonElement.value = "Hate/Trolls TwitchmodsDACH Bannliste";
+
+            // URLs der Datenquellen
+            const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_h_m.txt";
+            const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt";
+
+            // Fetch Data from both TXT lists
+            Promise.all([
+              fetch(txtListUrl1).then(response => response.text()),
+              fetch(txtListUrl2).then(response => response.text())
+            ])
+            .then(([data1, data2]) => {
+              // Combine the data from the TXT lists
+              usersToBan.push(...data1.split("\n").filter(Boolean));
+              usersToBan.push(...data2.split("\n").filter(Boolean));
+
+              // Process the combined list
+              usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnTrolls1"));
+              textarea.value = '';
+              insertText(Array.from(queueList));
+              if (queueList.size != "0") { toggleImport(); renderList(); }
+            })
+            .catch(error => {
+              console.error('Fehler beim Abrufen der Daten:', error);
+            });
+
+            // Update replaceFooter for both sources
+            document.getElementById("replaceFooter").innerHTML = `
+              Geladene Listen:
+              <br><a href="${txtListUrl1}" target="_blank">isds_hate_troll_list_h_m.txt</a>
+              <br><a href="${txtListUrl2}" target="_blank">cerberus_hate_troll_list.txt</a>
+            `;
+
+            function dumdidum() {
+              document.getElementById("mdgBtnTrolls1").innerHTML = mdgBtnTrollsText1;
+            }
+            setTimeout(dumdidum, 250);
+          }
 
     function importMDGtrolls2() {
-      queueList.clear();
-      var usersToBan = [];
-      var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Hate/Trolls TwitchmodsDACH Bannliste";
+                queueList.clear();
+                var usersToBan = [];
+                var banReasonElement = document.getElementById("banReason");
+                banReasonElement.value = "Hate/Trolls TwitchmodsDACH Bannliste";
 
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_n_z.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnTrolls2"))
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'isds_hate_troll_list_n_z.txt' anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_n_z.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnTrolls2").innerHTML = mdgBtnTrollsText2
-      }
-      setTimeout(dumdidum, 250)
-    }
+                // URLs der Datenquellen
+                const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_hate_troll_list_n_z.txt";
+                const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt";
+
+                // Fetch Data from both TXT lists
+                Promise.all([
+                  fetch(txtListUrl1).then(response => response.text()),
+                  fetch(txtListUrl2).then(response => response.text())
+                ])
+                .then(([data1, data2]) => {
+                  // Combine the data from the TXT lists
+                  usersToBan.push(...data1.split("\n").filter(Boolean));
+                  usersToBan.push(...data2.split("\n").filter(Boolean));
+
+                  // Process the combined list
+                  usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnTrolls2"));
+                  textarea.value = '';
+                  insertText(Array.from(queueList));
+                  if (queueList.size != "0") { toggleImport(); renderList(); }
+                })
+                .catch(error => {
+                  console.error('Fehler beim Abrufen der Daten:', error);
+                });
+
+                // Update replaceFooter for both sources
+                document.getElementById("replaceFooter").innerHTML = `
+                  Geladene Listen:
+                  <br><a href="${txtListUrl1}" target="_blank">isds_hate_troll_list_n_z.txt</a>
+                  <br><a href="${txtListUrl2}" target="_blank">cerberus_hate_troll_list.txt</a>
+                `;
+
+                function dumdidum() {
+                  document.getElementById("mdgBtnTrolls2").innerHTML = mdgBtnTrollsText2;
+                }
+                setTimeout(dumdidum, 250);
+              }
+
     function importMDGsec() {
-      queueList.clear();
-      var usersToBan = [];
-      var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Security Bannliste TwitchModsDACH";
+        queueList.clear();
+        var usersToBan = [];
+        var banReasonElement = document.getElementById("banReason");
+        banReasonElement.value = "Security Bannliste TwitchModsDACH";
 
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_security_ban_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnSec"))
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
+        // URLs der Datenquellen
+        const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_security_ban_list.txt";
+        const txtListUrl2 = "";
+
+        // Fetch Data from both TXT lists
+        Promise.all([
+          fetch(txtListUrl1).then(response => response.text()),
+          fetch(txtListUrl2).then(response => response.text())
+        ])
+        .then(([data1, data2]) => {
+          // Combine the data from the TXT lists
+          usersToBan.push(...data1.split("\n").filter(Boolean));
+          usersToBan.push(...data2.split("\n").filter(Boolean));
+
+          // Process the combined list
+          usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnSec"));
+          textarea.value = '';
+          insertText(Array.from(queueList));
+          if (queueList.size != "0") { toggleImport(); renderList(); }
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'isds_security_ban_list.txt' anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_security_ban_list.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnSec").innerHTML = mdgBtnSec
+
+        // Update replaceFooter for both sources
+        document.getElementById("replaceFooter").innerHTML = `
+          Geladene Listen:
+          <br><a href="${txtListUrl1}" target="_blank">isds_security_ban_list.txt</a>
+          <br><a href="${txtListUrl2}" target="_blank"></a>
+        `;
+
+        function dumdidum() {
+          document.getElementById("mdgBtnSec").innerHTML = mdgBtnSec;
+        }
+        setTimeout(dumdidum, 250);
       }
-      setTimeout(dumdidum, 250)
-    }
+
     function importMDGUnban() {
       queueList.clear();
       var usersToBan = [];
@@ -697,27 +773,48 @@
     }
 
     function importMDGViewerBots() {
-      queueList.clear();
-      var usersToBan = [];
-      var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Viewer Bot";
+        queueList.clear();
+        var usersToBan = [];
+        var banReasonElement = document.getElementById("banReason");
+        banReasonElement.value = "Viewer Bot";
 
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_viewer_bot_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnViewerBots"));
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-          });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_viewer_bot_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_viewer_bot_list.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnViewerBots").innerHTML = mdgBtnViewerBotsText
+        // URLs der Datenquellen
+        const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_viewer_bot_list.txt";
+        const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_viewer_bot_list.txt";
+
+        // Fetch Data from both TXT lists
+        Promise.all([
+          fetch(txtListUrl1).then(response => response.text()),
+          fetch(txtListUrl2).then(response => response.text())
+        ])
+        .then(([data1, data2]) => {
+          // Combine the data from the TXT lists
+          usersToBan.push(...data1.split("\n").filter(Boolean));
+          usersToBan.push(...data2.split("\n").filter(Boolean));
+
+          // Process the combined list
+          usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnViewerBots"));
+          textarea.value = '';
+          insertText(Array.from(queueList));
+          if (queueList.size != "0") { toggleImport(); renderList(); }
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
+        });
+
+        // Update replaceFooter for both sources
+        document.getElementById("replaceFooter").innerHTML = `
+          Geladene Listen:
+          <br><a href="${txtListUrl1}" target="_blank">isds_viewer_bot_list.txt</a>
+          <br><a href="${txtListUrl2}" target="_blank">cerberus_viewer_bot_list.txt</a>
+        `;
+
+        function dumdidum() {
+          document.getElementById("mdgBtnViewerBots").innerHTML = mdgBtnViewerBotsText;
+        }
+        setTimeout(dumdidum, 250);
       }
-      setTimeout(dumdidum, 250)
-    }
+
 
     function importMDGFlirtyMad() {
       queueList.clear();
@@ -743,127 +840,223 @@
     }
 
     function importMDGFollowBot() {
-      if (document.getElementById("banReason").value == "") {
-        document.getElementById("banReason").value = urlBannlisten
+      if (document.getElementById("banReason").value === "") {
+        document.getElementById("banReason").value = urlBannlisten; // Falls urlBannlisten definiert ist, benutze diesen Wert.
       }
       queueList.clear();
       var usersToBan = [];
       var banReasonElement = document.getElementById("banReason");
       banReasonElement.value = "Follow Bot";
 
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_follower_bot_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnFollowBot"));
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_follower_bot_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_follower_bot_list.txt"
+      // URLs der Datenquellen
+      const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_follower_bot_list.txt";
+      const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_follower_bot_list.txt";
+
+      // Fetch Data from both TXT lists
+      Promise.all([
+        fetch(txtListUrl1).then(response => response.text()),
+        fetch(txtListUrl2).then(response => response.text())
+      ])
+      .then(([data1, data2]) => {
+        // Combine the data from the TXT lists
+        usersToBan.push(...data1.split("\n").filter(Boolean));
+        usersToBan.push(...data2.split("\n").filter(Boolean));
+
+        // Process the combined list
+        usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnFollowBot"));
+        textarea.value = '';
+        insertText(Array.from(queueList));
+        if (queueList.size !== 0) { toggleImport(); renderList(); }
+      })
+      .catch(error => {
+        console.error('Fehler beim Abrufen der Daten:', error);
+      });
+
+      // Update replaceFooter for both sources
+      document.getElementById("replaceFooter").innerHTML = `
+        Geladene Listen:
+        <br><a href="${txtListUrl1}" target="_blank">isds_follower_bot_list.txt</a>
+        <br><a href="${txtListUrl2}" target="_blank">cerberus_follower_bot_list.txt</a>
+      `;
+
       function dumdidum() {
-        document.getElementById("mdgBtnFollowBot").innerHTML = mdgBtnFollowBotText
+        document.getElementById("mdgBtnFollowBot").innerHTML = mdgBtnFollowBotText;
       }
-      setTimeout(dumdidum, 250)
+      setTimeout(dumdidum, 250);
     }
 
+
     function importMDGAdvertising() {
-      if (document.getElementById("banReason").value == "") {
-        document.getElementById("banReason").value = urlBannlisten
+      if (document.getElementById("banReason").value === "") {
+        document.getElementById("banReason").value = urlBannlisten; // Falls urlBannlisten definiert ist, benutze diesen Wert.
       }
       queueList.clear();
       var usersToBan = [];
       var banReasonElement = document.getElementById("banReason");
       banReasonElement.value = "Werbung";
 
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_seller_advertising_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnAdvertising"));
-            renderList()
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_seller_advertising_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_seller_advertising_list.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnAdvertising").innerHTML = mdgBtnAdvertisingText
-      }
-      setTimeout(dumdidum, 250)
-    }
+      // URLs der Datenquellen
+      const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_seller_advertising_list.txt";
+      const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_seller_advertising_list.txt";
 
+      // Fetch Data from both TXT lists
+      Promise.all([
+        fetch(txtListUrl1).then(response => response.text()),
+        fetch(txtListUrl2).then(response => response.text())
+      ])
+      .then(([data1, data2]) => {
+        // Combine the data from the TXT lists
+        usersToBan.push(...data1.split("\n").filter(Boolean));
+        usersToBan.push(...data2.split("\n").filter(Boolean));
+
+        // Process the combined list
+        usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnAdvertising"));
+        textarea.value = '';
+        insertText(Array.from(queueList));
+        if (queueList.size !== 0) { toggleImport(); renderList(); }
+      })
+      .catch(error => {
+        console.error('Fehler beim Abrufen der Daten:', error);
+      });
+
+      // Update replaceFooter for both sources
+      document.getElementById("replaceFooter").innerHTML = `
+        Geladene Listen:
+        <br><a href="${txtListUrl1}" target="_blank">isds_seller_advertising_list.txt</a>
+        <br><a href="${txtListUrl2}" target="_blank">cerberus_seller_advertising_list.txt</a>
+      `;
+
+      function dumdidum() {
+        document.getElementById("mdgBtnAdvertising").innerHTML = mdgBtnAdvertisingText;
+      }
+      setTimeout(dumdidum, 250);
+    }
 
     function importMDGSpamBots() {
-      queueList.clear();
-      var usersToBan = [];
-      var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Spam Bot";
-
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_spam_bot_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnSpamBots"));
-            textarea.value = '';
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_spam_bot_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_spam_bot_list.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnSpamBots").innerHTML = mdgBtnSpamBotsText
-      }
-      setTimeout(dumdidum, 250)
-    }
-
-
-    function importMDGStreamSniper() {
-      queueList.clear();
-      var usersToBan = [];
-      var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Streamsniper";
-
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_streamsniper_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "tmdBtnStreamSniper"));
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_streamsniper_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_streamsniper_list.txt"
-      function dumdidum() {
-        document.getElementById("tmdBtnStreamSniper").innerHTML = mdgBtnStreamSniperText
-      }
-      setTimeout(dumdidum, 250)
-    }
-
-      function importMDGFakeScam() {
-      queueList.clear();
+        queueList.clear();
         var usersToBan = [];
         var banReasonElement = document.getElementById("banReason");
-        banReasonElement.value = "Fake/Scam Account";
+        banReasonElement.value = "Spam Bot";
 
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_fake_scam_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
+        // URLs der Datenquellen
+        const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_spam_bot_list.txt";
+        const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_spam_bot_list.txt";
+        // Fetch Data from both TXT lists
+        Promise.all([
+          fetch(txtListUrl1).then(response => response.text()),
+          fetch(txtListUrl2).then(response => response.text())
+        ])
+        .then(([data1, data2]) => {
+          // Combine the data from the TXT lists
+          usersToBan.push(...data1.split("\n").filter(Boolean));
+          usersToBan.push(...data2.split("\n").filter(Boolean));
+
+          // Process the combined list
+          usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnSpamBots"));
+          textarea.value = '';
+          if (queueList.size !== 0) { toggleImport(); renderList(); }
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
+        });
+
+        // Update replaceFooter for both sources
+        document.getElementById("replaceFooter").innerHTML = `
+          Geladene Listen:
+          <br><a href="${txtListUrl1}" target="_blank">isds_spam_bot_list.txt</a>
+          <br><a href="${txtListUrl2}" target="_blank">cerberus_spam_bot_list.txt</a>
+        `;
+
+        function dumdidum() {
+          document.getElementById("mdgBtnSpamBots").innerHTML = mdgBtnSpamBotsText;
+        }
+        setTimeout(dumdidum, 250);
+      }
+    function importMDGStreamSniper() {
+        queueList.clear();
+        var usersToBan = [];
+        var banReasonElement = document.getElementById("banReason");
+        banReasonElement.value = "Streamsniper";
+
+        // URLs der Datenquellen
+        const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_streamsniper_list.txt";
+        const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_streamsniper_list.txt";
+        // Fetch Data from both TXT lists
+        Promise.all([
+          fetch(txtListUrl1).then(response => response.text()),
+          fetch(txtListUrl2).then(response => response.text())
+        ])
+        .then(([data1, data2]) => {
+          // Combine the data from the TXT lists
+          usersToBan.push(...data1.split("\n").filter(Boolean));
+          usersToBan.push(...data2.split("\n").filter(Boolean));
+
+          // Process the combined list
+          usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "tmdBtnStreamSniper"));
+          textarea.value = '';
+          insertText(Array.from(queueList));
+          if (queueList.size !== 0) { toggleImport(); renderList(); }
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
+        });
+
+        // Update replaceFooter for both sources
+        document.getElementById("replaceFooter").innerHTML = `
+          Geladene Listen:
+          <br><a href="${txtListUrl1}" target="_blank">isds_streamsniper_list.txt</a>
+          <br><a href="${txtListUrl2}" target="_blank">cerberus_streamsniper_list.txt</a>
+        `;
+
+        function dumdidum() {
+          document.getElementById("tmdBtnStreamSniper").innerHTML = mdgBtnStreamSniperText;
+        }
+        setTimeout(dumdidum, 250);
+      }
+
+      function importMDGFakeScam() {
+          queueList.clear();
+          var usersToBan = [];
+          var banReasonElement = document.getElementById("banReason");
+          banReasonElement.value = "Fake/Scam Account";
+
+          // URLs der Datenquellen
+          const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_fake_scam_list.txt";
+          const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_fake_scam_list.txt";
+
+          // Fetch Data from both TXT lists
+          Promise.all([
+            fetch(txtListUrl1).then(response => response.text()),
+            fetch(txtListUrl2).then(response => response.text())
+          ])
+          .then(([data1, data2]) => {
+            // Combine the data from the TXT lists
+            usersToBan.push(...data1.split("\n").filter(Boolean));
+            usersToBan.push(...data2.split("\n").filter(Boolean));
+
+            // Process the combined list
             usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnFakeScam"));
             textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_fake_scam_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_fake_scam_list.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnFakeScam").innerHTML = mdgBtnFakeScamText
-      }
-      setTimeout(dumdidum, 250)
-    }
+            insertText(Array.from(queueList));
+            if (queueList.size !== 0) { toggleImport(); renderList(); }
+          })
+          .catch(error => {
+            console.error('Fehler beim Abrufen der Daten:', error);
+          });
+
+          // Update replaceFooter for both sources
+          document.getElementById("replaceFooter").innerHTML = `
+            Geladene Listen:
+            <br><a href="${txtListUrl1}" target="_blank">isds_fake_scam_list.txt</a>
+            <br><a href="${txtListUrl2}" target="_blank">cerberus_fake_scam_list.txt</a>
+          `;
+
+          function dumdidum() {
+            document.getElementById("mdgBtnFakeScam").innerHTML = mdgBtnFakeScamText;
+          }
+          setTimeout(dumdidum, 250);
+        }
+
 
       function importMDGPorn() {
       queueList.clear();
