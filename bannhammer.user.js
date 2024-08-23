@@ -2,7 +2,7 @@
 // @name            Bannliste - cerberus91_de Edition
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - cerberus91_de Edition
-// @version         1.0.0.0
+// @version         1.0.0.1
 // @match           *://www.twitch.tv/*
 // @run-at          document-idle
 // @author          TwitchModsDACH - The original code is from victornpb
