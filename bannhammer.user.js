@@ -494,7 +494,7 @@
     // Function checking new versions
     function toggle() {
       function checkVersion() {
-        fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bann-Hammer/main/bannhammer.user.js")
+        fetch("https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.user.js")
           .then((response) => response.text())
           .then((text) => {
             var regex = /@version\s+(\d.*)/;
