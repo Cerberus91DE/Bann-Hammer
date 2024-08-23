@@ -2,7 +2,7 @@
 // @name            Bannliste - cerberus91_de Edition Beta
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - cerberus91_de Edition Beta
-// @version         1.0.0.1
+// @version         1.0.0.2
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // @homepageURL     https://github.com/TwitchmodsDACH/Bann-Hammer
@@ -34,7 +34,7 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.0.0.1"
+    var myVersion = "1.0.0.2"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
