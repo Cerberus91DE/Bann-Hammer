@@ -854,8 +854,8 @@
       // Update replaceFooter for both sources
       document.getElementById("replaceFooter").innerHTML = `
         Geladene Listen:
-        <br><a href="${txtListUrl1}" target="_blank">isds_follower_bot_list.txt</a>
-        <br><a href="${txtListUrl2}" target="_blank">cerberus_follower_bot_list.txt</a>
+        <br><a href="${txtListUrl1}" target="_blank">isds_mad_tos_list.txt</a>
+        <br><a href="${txtListUrl2}" target="_blank">cerberus_mad_tos_list.txt</a>
       `;
 
       function dumdidum() {
