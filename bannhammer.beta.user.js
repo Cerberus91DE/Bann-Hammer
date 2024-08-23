@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name            Bannliste - cerberus91_de Edition
+// @name            Bannliste - cerberus91_de Edition Beta
 // @description     A tool for moderating Twitch easier during hate raids
-// @namespace       Bannliste - cerberus91_de Edition
+// @namespace       Bannliste - cerberus91_de Edition Beta
 // @version         1.0.0.0
 // @match           *://www.twitch.tv/*
 // @run-at          document-idle
@@ -494,7 +494,7 @@
     // Function checking new versions
     function toggle() {
       function checkVersion() {
-        fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bann-Hammer/main/bannhammer.user.js")
+        fetch("https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.beta.user.js")
           .then((response) => response.text())
           .then((text) => {
             var regex = /@version\s+(\d.*)/;
