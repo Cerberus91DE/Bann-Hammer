@@ -1052,8 +1052,8 @@
 
     // Render list or show logo
     function renderList() {
-    // Maximal 1000 Benutzer anzeigen
-    const maxUsersToShow = 1000;
+    // Maximal 500 Benutzer anzeigen
+    const maxUsersToShow = 500;
 
     d.querySelector(".ignoreAll").style.display = queueList.size ? '' : 'none';
     d.querySelector(".banAll").style.display = queueList.size ? '' : 'none';
@@ -1062,7 +1062,7 @@
     d.querySelector(".modChannels").style.display = queueList.size ? '' : 'none';
     d.querySelector(".unbanAll").style.display = queueList.size ? '' : 'none';
 
-    // Begrenzen auf die ersten 1000 Benutzer
+    // Begrenzen auf die ersten 500 Benutzer
     const limitedQueueList = [...queueList].slice(0, maxUsersToShow);
 
     const renderItem = item => `
