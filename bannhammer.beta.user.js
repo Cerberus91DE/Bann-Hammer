@@ -817,30 +817,53 @@
         }
         setTimeout(dumdidum, 250);
       }
-
-
+    
     function importMDGFlirtyMad() {
+      if (document.getElementById("banReason").value === "") {
+        document.getElementById("banReason").value = urlBannlisten; // Falls urlBannlisten definiert ist, benutze diesen Wert.
+      }
       queueList.clear();
       var usersToBan = [];
       var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "TOS TwitchModsDACH Bannliste";
+      banReasonElement.value = "Mad/TOS";
 
-      fetch("https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_mad_tos_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnFlirtyMad"));
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-        });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_mad_tos_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_mad_tos_list.txt"
+      // URLs der Datenquellen
+      const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_mad_tos_list.txt";
+      const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_mad_tos_list.txt";
+
+      // Fetch Data from both TXT lists
+      Promise.all([
+        fetch(txtListUrl1).then(response => response.text()),
+        fetch(txtListUrl2).then(response => response.text())
+      ])
+      .then(([data1, data2]) => {
+        // Combine the data from the TXT lists
+        usersToBan.push(...data1.split("\n").filter(Boolean));
+        usersToBan.push(...data2.split("\n").filter(Boolean));
+
+        // Process the combined list
+        usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnFlirtyMad"));
+        textarea.value = '';
+        insertText(Array.from(queueList));
+        if (queueList.size !== 0) { toggleImport(); renderList(); }
+      })
+      .catch(error => {
+        console.error('Fehler beim Abrufen der Daten:', error);
+      });
+
+      // Update replaceFooter for both sources
+      document.getElementById("replaceFooter").innerHTML = `
+        Geladene Listen:
+        <br><a href="${txtListUrl1}" target="_blank">isds_follower_bot_list.txt</a>
+        <br><a href="${txtListUrl2}" target="_blank">cerberus_follower_bot_list.txt</a>
+      `;
+
       function dumdidum() {
-        document.getElementById("mdgBtnFlirtyMad").innerHTML = mdgBtnFlirtyMadText
+        document.getElementById("mdgBtnFlirtyMad").innerHTML = mdgBtnFlirtyMadText;
       }
-      setTimeout(dumdidum, 250)
+      setTimeout(dumdidum, 250);
     }
+
 
     function importMDGFollowBot() {
       if (document.getElementById("banReason").value === "") {
