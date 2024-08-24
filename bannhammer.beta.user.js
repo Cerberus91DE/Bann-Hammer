@@ -6,13 +6,6 @@
 // @match           *://www.twitch.tv/*
 // @run-at          document-idle
 // @author          TwitchModsDACH - The original code is from victornpb
-// @homepageURL     https://github.com/TwitchmodsDACH/Bann-Hammer
-// @supportURL      https://github.com/TwitchmodsDACH/Bann-Hammer/issues
-// @contributionURL https://github.com/TwitchmodsDACH/Bann-Hammer
-// @grant           GM_setValue
-// @grant           GM_getValue
-// @grant           GM_xmlhttpRequest
-// @license         MIT
 // ==/UserScript==
 
 /* jshint esversion: 8 */
