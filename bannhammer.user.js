@@ -2,7 +2,7 @@
 // @name            Bannliste - cerberus91_de Edition 
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - cerberus91_de Edition 
-// @version         1.1.0.0
+// @version         1.2.0.0
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // @homepageURL     https://github.com/TwitchmodsDACH/Bann-Hammer
@@ -15,13 +15,41 @@
 (function() {
     'use strict';
 
-    function processStoredModChannels() {
-        const storedModChannels = JSON.parse(localStorage.getItem("myModChannels"));
+    // Schlüssel für localStorage
+    const MOD_CHANNELS_KEY = "myModChannels";
+
+    // Funktion zum Speichern von Mod-Kanälen in localStorage
+    function saveModChannels(modChannels) {
+        localStorage.setItem(MOD_CHANNELS_KEY, JSON.stringify(modChannels));
     }
 
-    processStoredModChannels
-})();
+    // Funktion zum Abrufen von Mod-Kanälen aus localStorage
+    function getStoredModChannels() {
+        const storedModChannels = JSON.parse(localStorage.getItem(MOD_CHANNELS_KEY)) || [];
+        return storedModChannels;
+    }
 
+    // Funktion zum Verarbeiten der gespeicherten Mod-Kanäle
+    function processStoredModChannels() {
+        const storedModChannels = getStoredModChannels();
+        // Hier können Sie etwas mit den gespeicherten Mod-Kanälen machen, z.B. in der Ansicht darstellen
+        console.log('Mod Channels:', storedModChannels);
+    }
+
+    // Beispiel für das Speichern neuer Mod-Kanäle
+    function updateModChannels(newChannels) {
+        const existingChannels = getStoredModChannels();
+        const updatedChannels = Array.from(new Set([...existingChannels, ...newChannels])); // Vermeidet Duplikate
+        saveModChannels(updatedChannels);
+    }
+
+    // Beispielhafte Verwendung
+    processStoredModChannels() // Daten abrufen und verarbeiten
+
+    // Beispiel zum Hinzufügen neuer Mod-Kanäle (kann durch Benutzeraktionen oder andere Logik ersetzt werden)
+    // updateModChannels(['channel1', 'channel2']);
+
+})();
 
 (function (urlCount) {
 
@@ -34,7 +62,7 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.1.0.0"
+    var myVersion = "1.2.0.0"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
