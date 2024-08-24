@@ -2,7 +2,7 @@
 // @name            Bannliste - cerberus91_de Edition Beta
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - cerberus91_de Edition Beta
-// @version         1.3.0.0
+// @version         1.3.0.1
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // @homepageURL     https://github.com/TwitchmodsDACH/Bann-Hammer
@@ -62,7 +62,7 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.0.0.0"
+    var myVersion = "1.0.0.1"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
@@ -264,84 +264,80 @@
             text-align: center;
         }
 
-    </style>
+        </style>
     <div class="header">
         <span style="flex-grow: -1;"></span>
         <span class="handle" style="flex-grow: -1;"></span>
         <button class="princess"><img src="https://raw.githubusercontent.com/TwitchmodsDACH/Bann-Hammer/main/dokumentation/magicwand.png" title="Für die Prinzessinnen unter uns" width="20px" height="20px"></button>
-
         <span style="flex-grow: 1;"></span>
         <h5 id="header" class="logo">
-
             <a href="https://github.com/TwitchmodsDACH/Bann-Hammer" target="_blank" style="color: ${themeTextColor};" titel="Zum Bann-Hammer Repository">Bann-Hammer&nbsp;&nbsp;
               <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="5 5 1280 1280" style="color: ${themeTextColor};fill: currentcolor;align:center;">
                 <path d="M517 1c-16 3-28 10-41 22l-10 10 161 160 161 161 2-2c6-4 17-19 21-25 10-19 12-44 4-64-6-14-5-13-120-129L576 17c-8-7-18-12-27-15-8-1-25-2-32-1zM249 250 77 422l161 161 161 161 74-74 74-75 18 19 18 18-2 4c-4 6-4 14-1 20a28808 28808 0 0 0 589 621c4 2 6 3 13 3 6 0 8-1 13-3 6-4 79-77 82-83 4-9 4-21-2-29l-97-93-235-223-211-200c-51-47-73-68-76-69-6-3-13-3-19 0l-5 3-18-18-18-18 74-74 74-74-161-161L422 77 249 250zM23 476a75 75 0 0 0-10 95c4 6 219 222 231 232 8 7 16 11 26 14 6 2 10 2 22 2s14 0 22-2l14-6c5-4 20-16 24-21l2-2-161-161L32 466l-9 10z"/>
               </svg>
-              &nbsp;&nbsp;cerberus91_de Beta</a>
+              &nbsp;&nbsp;cerberus91_de beta</a>
         </h5><br>
-
         <span style="flex-grow: 1;"></span>
         <button class="closeBtn">_</button>
     </div>
-
-    <div id="import" class="import" style="display:none;">
-        <textarea id="textfield" placeholder="Ein Benutzername pro Zeile"></textarea>
-        <div style="text-align:right;">
-            <input type="text" id="banReason" style="width:66%" placeholder="Gib einen Bann-Grund an" />
-            <button class="importBtn" title="Benutzer zur Liste hinzufügen" style="width:32%">➕ Hinzufügen</button>
-        </div>
-        <div style="align:center">
-          <button id="mdgBtnTrolls0" class="mdgBtnTrolls0" style="width:32%" title="Importiert die isds_hate_troll Liste 0 bis g">${mdgBtnTrollsText0}</button>
-          <button id="mdgBtnTrolls1" class="mdgBtnTrolls1" style="width:33%" title="Importiert die isds_hate_troll Liste h bis m">${mdgBtnTrollsText1}</button>
-          <button id="mdgBtnTrolls2" class="mdgBtnTrolls2" style="width:32%" title="Importiert die isds_hate_troll Liste n bis z">${mdgBtnTrollsText2}</button>
-        </div>
-        <div style="align:center">
-          <button id="mdgBtnSec" class="mdgBtnSec" style="width:32%" title="Importiert isds_security_ban Liste">${mdgBtnSec}</button>
-          <button id="mdgBtnViewerBots" class="mdgBtnViewerBots" style="width:33%" title="Importiert isds_viewerbot Liste">${mdgBtnViewerBotsText}</button>
-          <button id="tmdBtnStreamSniper" class="tmdBtnStreamSniper" style="width:32%" title="Importiert isds_streamsniper Liste">${mdgBtnStreamSniperText}</button>
-        </div>
-        <div style="align:center">
-          <button id="mdgBtnFlirtyMad" class="mdgBtnFlirtyMad" style="width:32%" title="Importiert isds_mad_tos Liste">${mdgBtnFlirtyMadText}</button>
-          <button id="mdgBtnFollowBot" class="mdgBtnFollowBot" style="width:33%" title="Importiert isds_follow_bots Liste">${mdgBtnFollowBotText}</button>
-          <button id="mdgBtnUnban" class="mdgBtnUnban" style="width:32%;color:#34ae0c" title="Importiert isds_unban Liste">${mdgBtnUnbanText}</button>
-        </div>
-        <div style="align:center">
-          <button id="mdgBtnAdvertising" class="mdgBtnAdvertising" style="width:32%" title="Importiert isds_advertising Liste">${mdgBtnAdvertisingText}</button>
-          <button id="mdgBtnSpamBots" class="mdgBtnSpamBots" style="width:33%" title="Importiert isds_spam_bots Liste">${mdgBtnSpamBotsText}</button>
-          <button id="mdgBtnMasterListText" class="mdgBtnMasterListText" style="width:32%" title="Importiert alle Listen">${mdgBtnMasterListText}</button>
-        </div>
-        <div style="align:center">
-          <button id="mdgBtnFakeScam" class="mdgBtnFakeScam" style="width:32%" title="Importiert isds_fake_scam Liste">${mdgBtnFakeScamText}</button>
-          <button id="mdgBtnPornBot" class="mdgBtnPornBot" style="width:33%" title="Importiert isds_spam_bots Liste">${mdgBtnPornBotText}</button>
-          <button id="isds" class="isds" style="width:32%" title="Webseite des Institut für Sicherheit und Daten-Analyse im Streaming">https://isds.tech</button>
-        </div>
+<div id="import" class="import" style="display:none;">
+    <textarea id="textfield" placeholder="Ein Benutzername pro Zeile"></textarea>
+    <div style="text-align:right;">
+        <input type="text" id="banReason" style="width:66%" placeholder="Gib einen Bann-Grund an" />
+        <button class="importBtn" title="Benutzer zur Liste hinzufügen" style="width:32%">➕ Hinzufügen</button>
     </div>
-    <div class="body">
-        <div class="list"></div>
-        <div style="display: flex; margin: 5px;">
-          <span style="flex-grow: 2;"></span>
-          <div id="buttons" class="buttons">
-            <button class="back" title="Zurück">⬅</button>
-            <button class="MooBot" title="Öffnet Moobot" onclick="window.open('https://moo.bot/','_blank')"><img src="https://moo.bot/favicon.ico" height="17px" style = "position:relative; top:1px;"></button>
-            <button class="NightBot" title="Öffnet Nightbot" onclick="window.open('https://nightbot.tv/dashboard','_blank')"><img src="https://logodix.com/logo/1909538.png" height="17px" style = "position:relative; top:1px;"></button>
-            <button class="comanderRoot" title="Öffnet ComanderRoot" onclick="window.open('https://twitch-tools.rootonline.de','_blank')">🤖</button>
-            <button class="sLabs" title="Öffnet Streamlabs" onclick="window.open('https://streamlabs.com/dashboard','_blank')"><img src="https://cdn.streamlabs.com/static/imgs/streamlabs-logos/app-icon/streamlabs-app-icon.png" height="17px" style = "position:relative; top:1px;"></button>
-            <button class="sElements" title="Öffnet Streamelements" onclick="window.open('https://streamelements.com/dashboard','_blank')"><img src="https://avatars.githubusercontent.com/u/16977512?s=17&v=4" style="position:relative; top:1px;"></button>
-            <button class="chatstats" title="Öffnet SullyGnome Kanal-Statistiken für den aktuellen Kanal" onclick="window.open('https://sullygnome.com/channel/${activeChannel}','_blank')">📈</button>
-            <button class="modLogger" title="Öffnet ModLogger für den aktuellen Kanal" onclick="window.open('https://jvpeek.github.io/twitchmodlogger/?channel=${activeChannel}','_blank')">🗄</button>
-            <button class="chatDeepStats" title="Öffnet ChatStats für den aktuellen Kanal" onclick="window.open('https://echtkpvl.github.io/echt-twitch/chat-stats.html?channel=${activeChannel}','_blank')">🩻</button>
-            <button class="pause" id="pause" title="Pause/Play">⏸</button>
-            <button class="modChannels" title="Alle als Mod-Kanal hinzufügen">⚔</button>
-            <button class="ignoreAll" title="Liste leeren">🗑</button>
-            <button class="unbanAll" title="Alle auf der Liste entbannen">⚕</button>
-            <button class="banAll" title="Alle auf der Liste bannen">👹</button>
-          </div>
-        </div>
+    <div style="text-align:center">
+      <button id="mdgBtnTrolls0" class="mdgBtnTrolls0" style="width:32%" title="Importiert die isds_hate_troll Liste 0 bis g">${mdgBtnTrollsText0}</button>
+      <button id="mdgBtnTrolls1" class="mdgBtnTrolls1" style="width:33%" title="Importiert die isds_hate_troll Liste h bis m">${mdgBtnTrollsText1}</button>
+      <button id="mdgBtnTrolls2" class="mdgBtnTrolls2" style="width:32%" title="Importiert die isds_hate_troll Liste n bis z">${mdgBtnTrollsText2}</button>
     </div>
-    <div id="footer" class="footer">
-    <a href="https://github.com/TwitchmodsDACH/Bannlisten" target="_blank" style="color: ${themeTextColor};" id="replaceFooter" titel="Zur Bannliste">TwitchModsDACH Bannlisten</a>&nbsp;-&nbsp;
-    <a id="manoooo" href="https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.beta.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
-    </div>`;
+    <div style="text-align:center">
+      <button id="mdgBtnSec" class="mdgBtnSec" style="width:32%" title="Importiert isds_security_ban Liste">${mdgBtnSec}</button>
+      <button id="mdgBtnViewerBots" class="mdgBtnViewerBots" style="width:33%" title="Importiert isds_viewerbot Liste">${mdgBtnViewerBotsText}</button>
+      <button id="tmdBtnStreamSniper" class="tmdBtnStreamSniper" style="width:32%" title="Importiert isds_streamsniper Liste">${mdgBtnStreamSniperText}</button>
+    </div>
+    <div style="text-align:center">
+      <button id="mdgBtnFlirtyMad" class="mdgBtnFlirtyMad" style="width:32%" title="Importiert isds_mad_tos Liste">${mdgBtnFlirtyMadText}</button>
+      <button id="mdgBtnFollowBot" class="mdgBtnFollowBot" style="width:33%" title="Importiert isds_follow_bots Liste">${mdgBtnFollowBotText}</button>
+      <button id="mdgBtnUnban" class="mdgBtnUnban" style="width:32%;color:#34ae0c" title="Importiert isds_unban Liste">${mdgBtnUnbanText}</button>
+    </div>
+    <div style="text-align:center">
+      <button id="mdgBtnAdvertising" class="mdgBtnAdvertising" style="width:32%" title="Importiert isds_advertising Liste">${mdgBtnAdvertisingText}</button>
+      <button id="mdgBtnSpamBots" class="mdgBtnSpamBots" style="width:33%" title="Importiert isds_spam_bots Liste">${mdgBtnSpamBotsText}</button>
+      <button id="mdgBtnMasterListText" class="mdgBtnMasterListText" style="width:32%" title="Importiert alle Listen">${mdgBtnMasterListText}</button>
+    </div>
+    <div style="text-align:center">
+      <button id="mdgBtnFakeScam" class="mdgBtnFakeScam" style="width:32%" title="Importiert isds_fake_scam Liste">${mdgBtnFakeScamText}</button>
+      <button id="mdgBtnPornBot" class="mdgBtnPornBot" style="width:33%" title="Importiert isds_spam_bots Liste">${mdgBtnPornBotText}</button>
+      <button id="isds" class="isds" style="width:32%" title="Webseite des Institut für Sicherheit und Daten-Analyse im Streaming">https://isds.tech</button>
+    </div>
+</div>
+<div class="body">
+    <div class="list"></div>
+    <div style="display: flex; margin: 5px;">
+      <span style="flex-grow: 2;"></span>
+      <div id="buttons" class="buttons">
+        <button class="back" title="Zurück">⬅</button>
+        <button class="MooBot" title="Öffnet Moobot" onclick="window.open('https://moo.bot/','_blank')"><img src="https://moo.bot/favicon.ico" height="17px" style="position:relative; top:1px;" alt="MooBot"></button>
+        <button class="NightBot" title="Öffnet Nightbot" onclick="window.open('https://nightbot.tv/dashboard','_blank')"><img src="https://logodix.com/logo/1909538.png" height="17px" style="position:relative; top:1px;" alt="NightBot"></button>
+        <button class="comanderRoot" title="Öffnet ComanderRoot" onclick="window.open('https://twitch-tools.rootonline.de','_blank')">🤖</button>
+        <button class="sLabs" title="Öffnet Streamlabs" onclick="window.open('https://streamlabs.com/dashboard','_blank')"><img src="https://cdn.streamlabs.com/static/imgs/streamlabs-logos/app-icon/streamlabs-app-icon.png" height="17px" style="position:relative; top:1px;" alt="Streamlabs"></button>
+        <button class="sElements" title="Öffnet Streamelements" onclick="window.open('https://streamelements.com/dashboard','_blank')"><img src="https://avatars.githubusercontent.com/u/16977512?s=17&v=4" style="position:relative; top:1px;" alt="Streamelements"></button>
+        <button class="chatstats" title="Öffnet SullyGnome Kanal-Statistiken für den aktuellen Kanal" onclick="window.open('https://sullygnome.com/channel/${activeChannel}','_blank')">📈</button>
+        <button class="modLogger" title="Öffnet ModLogger für den aktuellen Kanal" onclick="window.open('https://jvpeek.github.io/twitchmodlogger/?channel=${activeChannel}','_blank')">🗄</button>
+        <button class="chatDeepStats" title="Öffnet ChatStats für den aktuellen Kanal" onclick="window.open('https://echtkpvl.github.io/echt-twitch/chat-stats.html?channel=${activeChannel}','_blank')">🩻</button>
+        <button class="pause" id="pause" title="Pause/Play">⏸</button>
+        <button class="modChannels" title="Alle als Mod-Kanal hinzufügen">⚔</button>
+        <button class="ignoreAll" title="Liste leeren">🗑</button>
+        <button class="unbanAll" title="Alle auf der Liste entbannen">⚕</button>
+        <button class="banAll" title="Alle auf der Liste bannen">👹</button>
+      </div>
+    </div>
+</div>
+<div id="footer" class="footer">
+  <a href="https://github.com/TwitchmodsDACH/Bannlisten" target="_blank" style="color: ${themeTextColor};" id="replaceFooter" title="Zur Bannliste">TwitchModsDACH Bannlisten</a>&nbsp;-&nbsp;
+  <a id="updateLink" href="https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.beta.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
+</div>`;
 
     // Append Bann-Hammer after page load
     document.addEventListener('DOMContentLoaded', () => {
