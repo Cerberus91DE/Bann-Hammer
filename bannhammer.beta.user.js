@@ -66,20 +66,20 @@
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
-    var mdgBtnAdvertisingText = "➕ Werbung"
-    var mdgBtnFollowBotText = "➕ Follower Bot"
     var mdgBtnTrollsText0 = "➕ Hate/Troll User 0-g"
     var mdgBtnTrollsText1 = "➕ Hate/Troll User h_m"
     var mdgBtnTrollsText2 = "➕ Hate/Troll User n_z"
     var mdgBtnSec = "➕ Security Bannliste"
-    var mdgBtnUnbanText = "➕ UNBAN"
     var mdgBtnViewerBotsText = "➕ Viewer Bot"
-    var mdgBtnFlirtyMadText = "➕ TOS"
-    var mdgBtnSpamBotsText = "➕ Spam Bot"
     var mdgBtnStreamSniperText = "➕ Streamsniper"
-    var mdgBtnFakeScamText = "➕ Fake/Scam Acc"
-    var mdgBtnPornBotText = "➕ Porn Bot"
+    var mdgBtnFlirtyMadText = "➕ TOS"
+    var mdgBtnFollowBotText = "➕ Follower Bot"
+    var mdgBtnUnbanText = "➕ UNBAN"
+    var mdgBtnAdvertisingText = "➕ Werbung"
+    var mdgBtnSpamBotsText = "➕ Spam Bot"
     var mdgBtnMasterListText = "➕ MasterBann"
+    var mdgBtnFakeScamText = "➕ Fake/Scam Acc"
+    var mdgBtnPornBotText = "➕ ASCII/PornBot"
     var replaceFooter = "none"
     var isPaused = false;
     var queueList = new Set();
