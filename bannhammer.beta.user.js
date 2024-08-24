@@ -1,10 +1,9 @@
 // ==UserScript==
-// @name            Bannliste - cerberus91_de beta
+// @name            Bannliste - TESTVERSION
 // @description     A tool for moderating Twitch easier during hate raids
-// @namespace       Bannliste - cerberus91_de beta
-// @version         1.3.5
+// @namespace       Bannliste - TESTVERSION
+// @version         1.3.6
 // @match           *://www.twitch.tv/*
-// @run-at          document-idle
 // @author          TwitchModsDACH - The original code is from victornpb
 // ==/UserScript==
 
@@ -60,10 +59,10 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.3.5"
+    var myVersion = "1.3.6"
     var text;
     var banReason;
-    var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
+    var urlBannlisten = "https://github.com/Cerberus91DE/Bannlisten"
     var mdgBtnTrollsText0 = "➕ Hate/Troll Liste"
     var mdgBtnTrollsText1 = "➕ Platzhalter"
     var mdgBtnTrollsText2 = "➕ Platzhalter"
@@ -255,7 +254,7 @@
               <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="5 5 1280 1280" style="color: ${themeTextColor};fill: currentcolor;align:center;">
                 <path d="M517 1c-16 3-28 10-41 22l-10 10 161 160 161 161 2-2c6-4 17-19 21-25 10-19 12-44 4-64-6-14-5-13-120-129L576 17c-8-7-18-12-27-15-8-1-25-2-32-1zM249 250 77 422l161 161 161 161 74-74 74-75 18 19 18 18-2 4c-4 6-4 14-1 20a28808 28808 0 0 0 589 621c4 2 6 3 13 3 6 0 8-1 13-3 6-4 79-77 82-83 4-9 4-21-2-29l-97-93-235-223-211-200c-51-47-73-68-76-69-6-3-13-3-19 0l-5 3-18-18-18-18 74-74 74-74-161-161L422 77 249 250zM23 476a75 75 0 0 0-10 95c4 6 219 222 231 232 8 7 16 11 26 14 6 2 10 2 22 2s14 0 22-2l14-6c5-4 20-16 24-21l2-2-161-161L32 466l-9 10z"/>
               </svg>
-              &nbsp;&nbsp;cerberus91_de beta</a>
+              &nbsp;&nbsp;TESTVERSION</a>
         </h5><br>
         <span style="flex-grow: 1;"></span>
         <button class="closeBtn">_</button>
@@ -547,7 +546,7 @@
             d.querySelector(".import textarea").focus();
       }
     document.getElementById("replaceFooter").innerHTML = "Alle Bannlisten anzeigen"
-    document.getElementById("replaceFooter").href = "https://github.com/TwitchmodsDACH/Bannlisten"
+    document.getElementById("replaceFooter").href = "https://github.com/Cerberus91DE/Bannlisten"
     }
 
     // Function to verify a user is already banned/unbannd in a channel
@@ -603,7 +602,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'isds_hate_troll_list_0_g.txt' anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'cerberus_hate_troll_list.txt' anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnTrolls0").innerHTML = mdgBtnTrollsText0
@@ -626,7 +625,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'isds_hate_troll_list_0_g.txt' anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'cerberus_hate_troll_list.txt' anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnTrolls1").innerHTML = mdgBtnTrollsText1
@@ -649,7 +648,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'isds_hate_troll_list_0_g.txt' anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'cerberus_hate_troll_list.txt' anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnTrolls2").innerHTML = mdgBtnTrollsText2
@@ -715,7 +714,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
           });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_viewer_bot_list.txt anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_viewer_bot_list.txt anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_viewer_bot_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnViewerBots").innerHTML = mdgBtnViewerBotsText
@@ -738,7 +737,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_mad_tos_list.txt anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_mad_tos_list.txt anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_mad_tos_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnFlirtyMad").innerHTML = mdgBtnFlirtyMadText
@@ -764,7 +763,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_follower_bot_list.txt anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_follower_bot_list.txt anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_follower_bot_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnFollowBot").innerHTML = mdgBtnFollowBotText
@@ -791,7 +790,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_seller_advertising_list.txt anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_seller_advertising_list.tx anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_seller_advertising_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnAdvertising").innerHTML = mdgBtnAdvertisingText
@@ -814,7 +813,7 @@
             textarea.value = '';
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_spam_bot_list.txt anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_spam_bot_list.txt anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_spam_bot_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnSpamBots").innerHTML = mdgBtnSpamBotsText
@@ -838,7 +837,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_streamsniper_list.txt anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_streamsniper_list.txt anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_streamsniper_list.txt"
       function dumdidum() {
         document.getElementById("tmdBtnStreamSniper").innerHTML = mdgBtnStreamSniperText
@@ -861,7 +860,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_fake_scam_list.txt anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_fake_scam_list.txt anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_fake_scam_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnFakeScam").innerHTML = mdgBtnFakeScamText
@@ -884,7 +883,7 @@
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste isds_porn_bot_acc_list.txt anzeigen"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_porn_bot_acc_list.txt anzeigen"
       document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_porn_bot_acc_list.txt"
       function dumdidum() {
         document.getElementById("mdgBtnPornBot").innerHTML = mdgBtnPornBotText
