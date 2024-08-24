@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name            Bannliste - Betaversion
+// @name            Bannliste - TESTVERSION
 // @description     A tool for moderating Twitch easier during hate raids
-// @namespace       Bannliste - Betaversion
-// @version         1.3.7
+// @namespace       Bannliste - TESTVERSION
+// @version         0.0.0
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // ==/UserScript==
@@ -59,7 +59,7 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.3.7"
+    var myVersion = "0.0.0"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/Cerberus91DE/Bannlisten"
@@ -315,7 +315,7 @@
 </div>
 <div id="footer" class="footer">
   <a href="https://github.com/TwitchmodsDACH/Bannlisten" target="_blank" style="color: ${themeTextColor};" id="replaceFooter" title="Zur Bannliste">TwitchModsDACH Bannlisten</a>&nbsp;-&nbsp;
-  <a id="updateLink" href="https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.beta.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
+  <a id="updateLink" href="https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.TESTVERSION.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
 </div>`;
 
     // Append Bann-Hammer after page load
@@ -495,7 +495,7 @@
     // Function checking new versions
     function toggle() {
       function checkVersion() {
-        fetch("https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.beta.user.js")
+        fetch("https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.TESTVERSION.user.js")
           .then((response) => response.text())
           .then((text) => {
             var regex = /@version\s+(\d.*)/;
