@@ -2,7 +2,7 @@
 // @name            Bannliste - TESTVERSION
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - TESTVERSION
-// @version         0.0.0
+// @version         1.0.0
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // ==/UserScript==
@@ -59,7 +59,7 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "0.0.0"
+    var myVersion = "1.0.0"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/Cerberus91DE/Bannlisten"
