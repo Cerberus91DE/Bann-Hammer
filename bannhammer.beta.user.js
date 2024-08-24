@@ -2,7 +2,7 @@
 // @name            Bannliste - cerberus91_de Edition Beta
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - cerberus91_de Edition Beta
-// @version         1.3.3.0
+// @version         1.3.4.0
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // @homepageURL     https://github.com/TwitchmodsDACH/Bann-Hammer
@@ -62,13 +62,13 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.3.3.0"
+    var myVersion = "1.3.4.0"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
-    var mdgBtnTrollsText0 = "➕ Hate/Troll User 0-g"
-    var mdgBtnTrollsText1 = "➕ Hate/Troll User h_m"
-    var mdgBtnTrollsText2 = "➕ Hate/Troll User n_z"
+    var mdgBtnTrollsText0 = "➕ Hate/Troll Liste"
+    var mdgBtnTrollsText1 = "➕ Hate/Troll PLATZHALTER"
+    var mdgBtnTrollsText2 = "➕ Hate/Troll PLATZHALTER"
     var mdgBtnSec = "➕ Security Bannliste"
     var mdgBtnViewerBotsText = "➕ Viewer Bot"
     var mdgBtnStreamSniperText = "➕ Streamsniper"
@@ -428,6 +428,7 @@
     d.querySelector(".import button.tmdBtnStreamSniper").onclick = importMDGStreamSniper;
     d.querySelector(".import button.mdgBtnFakeScam").onclick = importMDGFakeScam;
     d.querySelector(".import button.mdgBtnPornBot").onclick = importMDGPorn;
+    d.querySelector(".import button.mdgBtnMasterListText").onclick = importMDGMasterList;
     d.querySelector(".import button.importBtn").onclick = importList;
 
     // delegated events
@@ -680,6 +681,7 @@
       }
       setTimeout(dumdidum, 250)
     }
+
     function importMDGUnban() {
       queueList.clear();
       var usersToBan = [];
@@ -892,6 +894,29 @@
       setTimeout(dumdidum, 250)
     }
 
+    function importMDGMasterList() {
+          queueList.clear();
+          var usersToBan = [];
+          var banReasonElement = document.getElementById("banReason");
+          banReasonElement.value = "MasterBann";
+
+          fetch("https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_MasterBannListe.txt")
+            .then((response) => response.text())
+            .then((data) => {
+                usersToBan.push(...data.split("\n").filter(Boolean));
+                usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnMasterListText"))
+                textarea.value = '';
+                insertText(Array.from(queueList))
+                if (queueList.size != "0") { toggleImport(); renderList(); }
+            });
+          document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'cerberus_MasterBannListe.txt' anzeigen"
+          document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_MasterBannListe.txt"
+          function dumdidum() {
+            document.getElementById("mdgBtnMasterListText").innerHTML = mdgBtnMasterListText
+          }
+          setTimeout(dumdidum, 250)
+        }
+
     // Functions to ban/unban/ignore/accountage
     function ignoreAll() {
       console.log(LOGPREFIX, 'Ignoring all...', queueList);
@@ -1056,8 +1081,8 @@
 
     // Render list or show logo
     function renderList() {
-    // Maximal 500 Benutzer anzeigen
-    const maxUsersToShow = 500;
+    // Maximal 250 Benutzer anzeigen
+    const maxUsersToShow = 250;
 
     d.querySelector(".ignoreAll").style.display = queueList.size ? '' : 'none';
     d.querySelector(".banAll").style.display = queueList.size ? '' : 'none';
@@ -1066,7 +1091,7 @@
     d.querySelector(".modChannels").style.display = queueList.size ? '' : 'none';
     d.querySelector(".unbanAll").style.display = queueList.size ? '' : 'none';
 
-    // Begrenzen auf die ersten 500 Benutzer
+    // Begrenzen auf die ersten 250 Benutzer
     const limitedQueueList = [...queueList].slice(0, maxUsersToShow);
 
     const renderItem = item => `
