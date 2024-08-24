@@ -2,7 +2,7 @@
 // @name            Bannliste - cerberus91_de Edition Beta
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - cerberus91_de Edition Beta
-// @version         1.1.1.1
+// @version         1.3.0.0
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // @homepageURL     https://github.com/TwitchmodsDACH/Bann-Hammer
@@ -62,7 +62,7 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.1.1.1"
+    var myVersion = "1.0.0.0"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/TwitchmodsDACH/Bannlisten"
@@ -740,7 +740,7 @@
                 setTimeout(dumdidum, 250);
               }
 
-    function importMDGsec() {
+        function importMDGsec() {
         queueList.clear();
         var usersToBan = [];
         var banReasonElement = document.getElementById("banReason");
@@ -812,16 +812,19 @@
         // URLs der Datenquellen
         const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_viewer_bot_list.txt";
         const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_viewer_bot_list.txt";
+        const txtListUrl3 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/twitchinsights_viewer_bot_list.txt";
 
         // Fetch Data from both TXT lists
         Promise.all([
           fetch(txtListUrl1).then(response => response.text()),
-          fetch(txtListUrl2).then(response => response.text())
+          fetch(txtListUrl2).then(response => response.text()),
+          fetch(txtListUrl3).then(response => response.text())
         ])
-        .then(([data1, data2]) => {
+        .then(([data1, data2, data3]) => {
           // Combine the data from the TXT lists
           usersToBan.push(...data1.split("\n").filter(Boolean));
           usersToBan.push(...data2.split("\n").filter(Boolean));
+          usersToBan.push(...data3.split("\n").filter(Boolean));
 
           // Process the combined list
           usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnViewerBots"));
@@ -845,7 +848,7 @@
         }
         setTimeout(dumdidum, 250);
       }
-    
+
     function importMDGFlirtyMad() {
       if (document.getElementById("banReason").value === "") {
         document.getElementById("banReason").value = urlBannlisten; // Falls urlBannlisten definiert ist, benutze diesen Wert.
@@ -1116,7 +1119,7 @@
       queueList.clear();
         var usersToBan = [];
         var banReasonElement = document.getElementById("banReason");
-        banReasonElement.value = "Porn Bot Account";
+        banReasonElement.value = "ASCII / PornBot";
 
         // URLs der Datenquellen
                   const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_porn_bot_acc_list.txt";
