@@ -485,7 +485,7 @@
     document.getElementById('header').innerHTML = dataHeader;
     document.getElementById('footer').innerHTML = dataFooter;
     document.getElementById('hammer').innerHTML = dataHammer;
-    }
+}
 
     // Function toggle pause/play
     function togglePause() {
@@ -740,48 +740,48 @@
                 setTimeout(dumdidum, 250);
               }
 
-        function importMDGsec() {
-        queueList.clear();
-        var usersToBan = [];
-        var banReasonElement = document.getElementById("banReason");
-        banReasonElement.value = "Security Bannliste TwitchModsDACH";
+    function importMDGsec() {
+          queueList.clear();
+          var usersToBan = [];
+          var banReasonElement = document.getElementById("banReason");
+          banReasonElement.value = "Security Bannliste TwitchModsDACH";
 
-        // URLs der Datenquellen
-        const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_security_ban_list.txt";
-        const txtListUrl2 = "";
+          // URLs der Datenquellen
+          const txtListUrl1 = "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_security_ban_list.txt";
+          const txtListUrl2 = "";
 
-        // Fetch Data from both TXT lists
-        Promise.all([
-          fetch(txtListUrl1).then(response => response.text()),
-          fetch(txtListUrl2).then(response => response.text())
-        ])
-        .then(([data1, data2]) => {
-          // Combine the data from the TXT lists
-          usersToBan.push(...data1.split("\n").filter(Boolean));
-          usersToBan.push(...data2.split("\n").filter(Boolean));
+          // Fetch Data from both TXT lists
+          Promise.all([
+            fetch(txtListUrl1).then(response => response.text()),
+            fetch(txtListUrl2).then(response => response.text())
+          ])
+          .then(([data1, data2]) => {
+            // Combine the data from the TXT lists
+            usersToBan.push(...data1.split("\n").filter(Boolean));
+            usersToBan.push(...data2.split("\n").filter(Boolean));
 
-          // Process the combined list
-          usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnSec"));
-          textarea.value = '';
-          insertText(Array.from(queueList));
-          if (queueList.size != "0") { toggleImport(); renderList(); }
-        })
-        .catch(error => {
-          console.error('Fehler beim Abrufen der Daten:', error);
-        });
+            // Process the combined list
+            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnSec"));
+            textarea.value = '';
+            insertText(Array.from(queueList));
+            if (queueList.size != "0") { toggleImport(); renderList(); }
+          })
+          .catch(error => {
+            console.error('Fehler beim Abrufen der Daten:', error);
+          });
 
-        // Update replaceFooter for both sources
-        document.getElementById("replaceFooter").innerHTML = `
-          Geladene Listen:
-          <br><a href="${txtListUrl1}" target="_blank">isds_security_ban_list.txt</a>
-          <br><a href="${txtListUrl2}" target="_blank"></a>
-        `;
+          // Update replaceFooter for both sources
+          document.getElementById("replaceFooter").innerHTML = `
+            Geladene Listen:
+            <br><a href="${txtListUrl1}" target="_blank">isds_security_ban_list.txt</a>
+            <br><a href="${txtListUrl2}" target="_blank"></a>
+          `;
 
-        function dumdidum() {
-          document.getElementById("mdgBtnSec").innerHTML = mdgBtnSec;
+          function dumdidum() {
+            document.getElementById("mdgBtnSec").innerHTML = mdgBtnSec;
+          }
+          setTimeout(dumdidum, 250);
         }
-        setTimeout(dumdidum, 250);
-      }
 
     function importMDGUnban() {
       queueList.clear();
@@ -1183,7 +1183,9 @@
             "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_fake_scam_list.txt",
             "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_fake_scam_list.txt",
             "https://raw.githubusercontent.com/TwitchmodsDACH/Bannlisten/main/isds_porn_bot_acc_list.txt",
-            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_porn_bot_acc_list.txt"
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_porn_bot_acc_list.txt",
+
+            "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/twitchinsights_viewer_bot_list.txt"
         ];
 
         // Daten von allen URLs abrufen und kombinieren
