@@ -321,7 +321,7 @@
   <a id="updateLink" href="https://raw.githubusercontent.com/Cerberus91DE/Bann-Hammer/main/bannhammer.beta.user.js" title="Aktuelle Bannhammer Version installieren">${updateText}</a>&nbsp;-&nbsp;&nbsp;${myVersion}
 </div>`;
 
-    // Append Bann-Hammer after page load
+        // Append Bann-Hammer after page load
     document.addEventListener('DOMContentLoaded', () => {
       document.body.appendChild(raidhammer);
     });
