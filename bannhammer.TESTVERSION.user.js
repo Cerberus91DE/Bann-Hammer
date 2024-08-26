@@ -2,7 +2,7 @@
 // @name            Bannliste - TESTVERSION
 // @description     A tool for moderating Twitch easier during hate raids
 // @namespace       Bannliste - TESTVERSION
-// @version         1.0.0.0
+// @version         1.0.0
 // @match           *://www.twitch.tv/*
 // @author          TwitchModsDACH - The original code is from victornpb
 // ==/UserScript==
@@ -59,12 +59,12 @@
     document.head.appendChild(jqueryUIScript);
 
     // Globle required Variables
-    var myVersion = "1.0.0.0"
+    var myVersion = "1.0.0"
     var text;
     var banReason;
     var urlBannlisten = "https://github.com/Cerberus91DE/Bannlisten"
     var mdgBtnTrollsText0 = "➕ Hate/Troll Liste"
-    var mdgBtnTrollsText1 = "➕ Platzhalter"
+    var mdgBtnMultiAccText = "➕ MultiAcc"
     var mdgBtnTrollsText2 = "➕ Platzhalter"
     var mdgBtnSec = "➕ Security Bannliste"
     var mdgBtnViewerBotsText = "➕ Viewer Bot"
@@ -266,28 +266,28 @@
         <button class="importBtn" title="Benutzer zur Liste hinzufügen" style="width:32%">➕ Hinzufügen</button>
     </div>
     <div style="text-align:center">
-      <button id="mdgBtnTrolls0" class="mdgBtnTrolls0" style="width:32%" title="Importiert die isds_hate_troll Liste 0 bis g">${mdgBtnTrollsText0}</button>
-      <button id="mdgBtnTrolls1" class="mdgBtnTrolls1" style="width:33%" title="Importiert die isds_hate_troll Liste h bis m">${mdgBtnTrollsText1}</button>
+      <button id="mdgBtnTrolls0" class="mdgBtnTrolls0" style="width:32%" title="Importiert die cerberus_hate_troll_list">${mdgBtnTrollsText0}</button>
+      <button id="mdgBtnMultiAcc" class="mdgBtnMultiAcc" style="width:33%" title="Importiert die cerberus_MultiAcc_list">${mdgBtnMultiAccText}</button>
       <button id="mdgBtnTrolls2" class="mdgBtnTrolls2" style="width:32%" title="Importiert die isds_hate_troll Liste n bis z">${mdgBtnTrollsText2}</button>
     </div>
     <div style="text-align:center">
       <button id="mdgBtnSec" class="mdgBtnSec" style="width:32%" title="Importiert isds_security_ban Liste">${mdgBtnSec}</button>
-      <button id="mdgBtnViewerBots" class="mdgBtnViewerBots" style="width:33%" title="Importiert isds_viewerbot Liste">${mdgBtnViewerBotsText}</button>
-      <button id="tmdBtnStreamSniper" class="tmdBtnStreamSniper" style="width:32%" title="Importiert isds_streamsniper Liste">${mdgBtnStreamSniperText}</button>
+      <button id="mdgBtnViewerBots" class="mdgBtnViewerBots" style="width:33%" title="Importiert cerberus_viewer_bot_list">${mdgBtnViewerBotsText}</button>
+      <button id="tmdBtnStreamSniper" class="tmdBtnStreamSniper" style="width:32%" title="Importiert cerberus_streamsniper_list">${mdgBtnStreamSniperText}</button>
     </div>
     <div style="text-align:center">
-      <button id="mdgBtnFlirtyMad" class="mdgBtnFlirtyMad" style="width:32%" title="Importiert isds_mad_tos Liste">${mdgBtnFlirtyMadText}</button>
-      <button id="mdgBtnFollowBot" class="mdgBtnFollowBot" style="width:33%" title="Importiert isds_follow_bots Liste">${mdgBtnFollowBotText}</button>
-      <button id="mdgBtnUnban" class="mdgBtnUnban" style="width:32%;color:#34ae0c" title="Importiert isds_unban Liste">${mdgBtnUnbanText}</button>
+      <button id="mdgBtnFlirtyMad" class="mdgBtnFlirtyMad" style="width:32%" title="Importiert cerberus_mad_tos_list">${mdgBtnFlirtyMadText}</button>
+      <button id="mdgBtnFollowBot" class="mdgBtnFollowBot" style="width:33%" title="Importiert cerberus_follower_bot_list">${mdgBtnFollowBotText}</button>
+      <button id="mdgBtnUnban" class="mdgBtnUnban" style="width:32%;color:#34ae0c" title="Importiert cerberus_whitelisted_bots">${mdgBtnUnbanText}</button>
     </div>
     <div style="text-align:center">
-      <button id="mdgBtnAdvertising" class="mdgBtnAdvertising" style="width:32%" title="Importiert isds_advertising Liste">${mdgBtnAdvertisingText}</button>
-      <button id="mdgBtnSpamBots" class="mdgBtnSpamBots" style="width:33%" title="Importiert isds_spam_bots Liste">${mdgBtnSpamBotsText}</button>
+      <button id="mdgBtnAdvertising" class="mdgBtnAdvertising" style="width:32%" title="Importiert cerberus_seller_advertising_list">${mdgBtnAdvertisingText}</button>
+      <button id="mdgBtnSpamBots" class="mdgBtnSpamBots" style="width:33%" title="Importiert cerberus_spam_bot_list">${mdgBtnSpamBotsText}</button>
       <button id="mdgBtnMasterListText" class="mdgBtnMasterListText" style="width:32%" title="Importiert alle Listen">${mdgBtnMasterListText}</button>
     </div>
     <div style="text-align:center">
-      <button id="mdgBtnFakeScam" class="mdgBtnFakeScam" style="width:32%" title="Importiert isds_fake_scam Liste">${mdgBtnFakeScamText}</button>
-      <button id="mdgBtnPornBot" class="mdgBtnPornBot" style="width:33%" title="Importiert isds_spam_bots Liste">${mdgBtnPornBotText}</button>
+      <button id="mdgBtnFakeScam" class="mdgBtnFakeScam" style="width:32%" title="Importiert cerberus_fake_scam_list">${mdgBtnFakeScamText}</button>
+      <button id="mdgBtnPornBot" class="mdgBtnPornBot" style="width:33%" title="Importiert cerberus_spam_bot_list">${mdgBtnPornBotText}</button>
       <button id="isds" class="isds" style="width:32%" title="Webseite des Institut für Sicherheit und Daten-Analyse im Streaming">https://isds.tech</button>
     </div>
 </div>
@@ -414,7 +414,7 @@
     d.querySelector(".isds").onclick = isds;
     d.querySelector(".import button.mdgBtnUnban").onclick = importMDGUnban;
     d.querySelector(".import button.mdgBtnTrolls0").onclick = importMDGtrolls0;
-    d.querySelector(".import button.mdgBtnTrolls1").onclick = importMDGtrolls1;
+    d.querySelector(".import button.mdgBtnMultiAcc").onclick = importMDGMultiAcc;
     d.querySelector(".import button.mdgBtnTrolls2").onclick = importMDGtrolls2;
     d.querySelector(".import button.mdgBtnSec").onclick = importMDGsec;
     d.querySelector(".import button.mdgBtnViewerBots").onclick = importMDGViewerBots;
@@ -610,25 +610,25 @@
       setTimeout(dumdidum, 250)
     }
 
-    function importMDGtrolls1() {
+    function importMDGMultiAcc() {
       queueList.clear();
       var usersToBan = [];
       var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Hate/Trolls TwitchmodsDACH Bannliste";
+      banReasonElement.value = "MultiAcc Bannliste";
 
-      fetch("https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt")
+      fetch("https://github.com/Cerberus91DE/Bannlisten/blob/main/cerberus_MultiAcc_list.txt")
         .then((response) => response.text())
         .then((data) => {
             usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnTrolls0"))
+            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnMultiAcc"))
             textarea.value = '';
             insertText(Array.from(queueList))
             if (queueList.size != "0") { toggleImport(); renderList(); }
         });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'cerberus_hate_troll_list.txt' anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_hate_troll_list.txt"
+      document.getElementById("replaceFooter").innerHTML = "Geladene Liste 'cerberus_MultiAcc_list.txt' anzeigen"
+      document.getElementById("replaceFooter").href = "https://github.com/Cerberus91DE/Bannlisten/blob/main/cerberus_MultiAcc_list.txt"
       function dumdidum() {
-        document.getElementById("mdgBtnTrolls1").innerHTML = mdgBtnTrollsText1
+        document.getElementById("mdgBtnMultiAcc").innerHTML = mdgBtnMultiAccText
       }
       setTimeout(dumdidum, 250)
     }
@@ -1078,8 +1078,8 @@
 
     // Render list or show logo
     function renderList() {
-    // Maximal 250 Benutzer anzeigen
-    const maxUsersToShow = 250;
+    // Maximal 10 Benutzer anzeigen
+    const maxUsersToShow = 10;
 
     d.querySelector(".ignoreAll").style.display = queueList.size ? '' : 'none';
     d.querySelector(".banAll").style.display = queueList.size ? '' : 'none';
@@ -1088,7 +1088,7 @@
     d.querySelector(".modChannels").style.display = queueList.size ? '' : 'none';
     d.querySelector(".unbanAll").style.display = queueList.size ? '' : 'none';
 
-    // Begrenzen auf die ersten 250 Benutzer
+    // Begrenzen auf die ersten 10 Benutzer
     const limitedQueueList = [...queueList].slice(0, maxUsersToShow);
 
     const renderItem = item => `
