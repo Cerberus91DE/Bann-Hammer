@@ -586,7 +586,7 @@
         document.getElementById("textfield").value = text;
     }
 
-    // Functions to import lists from TwitchModsDACH Repository
+    // Functions to import lists
     function importMDGtrolls0() {
       queueList.clear();
       var usersToBan = [];
@@ -700,27 +700,47 @@
     }
 
     function importMDGViewerBots() {
-      queueList.clear();
-      var usersToBan = [];
-      var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Viewer Bot";
+        queueList.clear();
+        var usersToBan = [];
+        var banReasonElement = document.getElementById("banReason");
+        banReasonElement.value = "Viewer Bot // Viewer Botting // Werbung";
 
-      fetch("https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_viewer_bot_list.txt")
-        .then((response) => response.text())
-        .then((data) => {
-            usersToBan.push(...data.split("\n").filter(Boolean));
-            usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnViewerBots"));
-            textarea.value = '';
-            insertText(Array.from(queueList))
-            if (queueList.size != "0") { toggleImport(); renderList(); }
-          });
-      document.getElementById("replaceFooter").innerHTML = "Geladene Liste cerberus_viewer_bot_list.txt anzeigen"
-      document.getElementById("replaceFooter").href = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_viewer_bot_list.txt"
-      function dumdidum() {
-        document.getElementById("mdgBtnViewerBots").innerHTML = mdgBtnViewerBotsText
+        // URLs der Datenquellen
+        const txtListUrl1 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_viewer_bot_list.txt";
+        const txtListUrl2 = "https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/twitchinsights_viewer_bot_list.txt";
+
+        // Fetch Data from both TXT lists
+        Promise.all([
+          fetch(txtListUrl1).then(response => response.text()),
+          fetch(txtListUrl2).then(response => response.text())
+        ])
+        .then(([data1, data2]) => {
+          // Combine the data from the TXT lists
+          usersToBan.push(...data1.split("\n").filter(Boolean));
+          usersToBan.push(...data2.split("\n").filter(Boolean));
+
+          // Process the combined list
+          usersToBan.forEach(name => userAlreadyBanned(name.replace(/\r/g, ""), "mdgBtnViewerBots"));
+          textarea.value = '';
+          insertText(Array.from(queueList));
+          if (queueList.size != "0") { toggleImport(); renderList(); }
+        })
+        .catch(error => {
+          console.error('Fehler beim Abrufen der Daten:', error);
+        });
+
+        // Update replaceFooter for both sources
+        document.getElementById("replaceFooter").innerHTML = `
+          Geladene Listen:
+          <br><a href="${txtListUrl1}" target="_blank">cerberus_viewer_bot_list.txt</a>
+          <br><a href="${txtListUrl2}" target="_blank">twitchinsights_viewer_bot_list.txt</a>
+        `;
+
+        function dumdidum() {
+          document.getElementById("mdgBtnViewerBots").innerHTML = mdgBtnViewerBotsText;
+        }
+        setTimeout(dumdidum, 250);
       }
-      setTimeout(dumdidum, 250)
-    }
 
     function importMDGFlirtyMad() {
       queueList.clear();
@@ -752,7 +772,7 @@
       queueList.clear();
       var usersToBan = [];
       var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Follow Bot";
+      banReasonElement.value = "Follow Bot // Follow Botting // Werbung";
 
       fetch("https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_follower_bot_list.txt")
         .then((response) => response.text())
@@ -803,7 +823,7 @@
       queueList.clear();
       var usersToBan = [];
       var banReasonElement = document.getElementById("banReason");
-      banReasonElement.value = "Spam Bot";
+      banReasonElement.value = "Spam // Spam Bot";
 
       fetch("https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_spam_bot_list.txt")
         .then((response) => response.text())
@@ -895,7 +915,7 @@
           queueList.clear();
           var usersToBan = [];
           var banReasonElement = document.getElementById("banReason");
-          banReasonElement.value = "MasterBann";
+          banReasonElement.value = "Bannlisten 'https://github.com/Cerberus91DE/Bannlisten'";
 
           fetch("https://raw.githubusercontent.com/Cerberus91DE/Bannlisten/main/cerberus_MasterBannListe.txt")
             .then((response) => response.text())
